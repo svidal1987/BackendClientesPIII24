@@ -6,7 +6,7 @@ const cors = require('cors');
 require('dotenv').config(); // Cargar las variables de entorno
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT ||  3000;
 
 console.log('MONGODB_URI:', process.env.MONGODB_URI); // Para depuración
 // Conexión a MongoDB
@@ -39,13 +39,6 @@ app.use(express.json());
 // Rutas
 app.use('/api', require('./routes/ClientRoutes'));
 
-app.use((req, res, next) => {
-  res.setHeader(
-    "Content-Security-Policy",
-    "default-src 'self'; script-src 'self' https://vercel.live"
-  );
-  next();
-});
 
 app.listen(PORT, () => {
   console.log(`Servidor corriendo en el puerto ${PORT}`);
