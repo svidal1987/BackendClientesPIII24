@@ -39,6 +39,14 @@ app.use(express.json());
 // Rutas
 app.use('/api', require('./routes/ClientRoutes'));
 
+app.use((req, res, next) => {
+  res.setHeader(
+    "Content-Security-Policy",
+    "default-src 'self'; script-src 'self' https://vercel.live"
+  );
+  next();
+});
+
 app.listen(PORT, () => {
   console.log(`Servidor corriendo en el puerto ${PORT}`);
 });
